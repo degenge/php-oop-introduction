@@ -2,9 +2,11 @@
 
 class Beverage
 {
-    public $color;
-    public $price;
-    public $temperature;
+    public const BARNAME = 'De Sixtijn';
+    static private int $timesServed = 0;
+    protected string $color;
+    protected float $price;
+    protected string $temperature;
 
     /**
      * Beverage constructor.
@@ -17,11 +19,29 @@ class Beverage
         $this->color       = $color;
         $this->price       = $price;
         $this->temperature = $temperature;
+        ++self::$timesServed;
     }
 
-    public function getInfo(): string
+    /**
+     * @param string $color
+     */
+    public function setColor(string $color): void
     {
-        return 'This beverage is ' . $this->temperature . ' and ' . $this->color . '.</br>';
+        $this->color = $color;
+    }
+
+    public function getBeverageInfo(): string
+    {
+        return 'This beverage is ' . $this->temperature . ' and ' . $this->color . ' and costs ' . $this->price . '.</br>';
+    }
+
+    public function getFavoriteBar(): string
+    {
+        return self::BARNAME;
+    }
+
+    public static function getTimesServed(): int {
+        return self::$timesServed;
     }
 
 }
